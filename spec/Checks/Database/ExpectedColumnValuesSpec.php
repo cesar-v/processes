@@ -10,8 +10,6 @@ class ExpectedColumnValuesSpec extends Database
     
     protected $column = 'column';
     
-    protected $failedException = 'CesarV\Processes\Checks\Failed';
-    
     function let()
     {
         parent::let();

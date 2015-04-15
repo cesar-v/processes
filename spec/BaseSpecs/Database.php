@@ -14,6 +14,8 @@ abstract class Database extends ObjectBehavior
      */
     protected $connection;
     
+    protected $failedException = 'CesarV\Processes\Checks\Failed';
+    
     function let()
     {
         $this->connection = new Connection(array(
