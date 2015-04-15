@@ -17,7 +17,7 @@ class Database implements Runner
     }
 
     public function execute($command, array $args = array())
-    {
+    {       
         $statement = $this->connection->prepare($command);
         
         foreach ($args as $arg => $value)
@@ -26,7 +26,10 @@ class Database implements Runner
         }
         
         $statement->execute();
-        
-        return $statement->fetchAll();
+                
+        if (strtoupper(substr($command, 0, 6)) == 'SELECT')
+        {
+            return $statement->fetchAll();
+        }
     }
 }
