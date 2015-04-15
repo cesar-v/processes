@@ -1,0 +1,41 @@
+{
+    "name": "cesarv/processes",
+    "description": "RESTful processes and process validations",
+    "homepage": "https://github.com/cesar-v/processes",
+    "keywords": [
+        "process", 
+        "processes",
+        "RESTful",
+        "json",
+        "process validation", 
+        "process execution", 
+        "process serialization"
+    ],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Cesar Vega",
+            "email": "cesar.binary@gmail.com",
+            "homepage": "https://github.com/cesar-v"
+        }
+    ],
+    "config": {
+        "bin-dir": "bin"
+    },    
+    "require": {
+        "nesbot/carbon": "~1.18",
+        "doctrine/dbal": "~2.5",
+        "cesarv/helpers": "~1.0"
+    },
+    "require-dev": {
+        "cesarv/dev-funcs": "dev-master",
+        "phpspec/phpspec": "~2.1",
+        "bossa/phpspec2-expect": "~1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "CesarV\\Processes\\": "pkg/",
+            "spec\\BaseSpecs\\": "spec/BaseSpecs"
+        }
+    }
+}

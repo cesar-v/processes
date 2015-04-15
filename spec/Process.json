@@ -1,0 +1,51 @@
+{
+    "prechecks": [
+        {
+            "type": "Database\\CheckDataAge",
+            "failedMessage": "It failed",
+            "params": {
+                "table": "test",
+                "column": "col1",
+                "expected-values": [
+                    "x", 
+                    "y", 
+                    "z"
+                ]
+            }
+        },
+        {
+            "type": "SomeOtherCheck",
+            "failed-message": "It failed",
+            "params": {
+                "string": "test",
+                "int": 1,
+                "float": 1.01,
+                "boolean": true,
+                "array": [
+                    "va2", 
+                    "val3"
+                ]
+            }
+        }   
+    ],
+    "type": "Database",
+    "command": "insert into some_table select * from test where col1 = :param",
+    "params": {
+        "param": "value"
+    },
+    "postchecks": [
+        {
+            "type": "Database\\CheckRowCounts",
+            "failedMessage": "It failed",
+            "params": {
+                "table": "test",
+                "column": "col1",
+                "expected-values": [
+                    "x", 
+                    "y", 
+                    "z"
+                ]
+            }
+        }
+    ]
+}

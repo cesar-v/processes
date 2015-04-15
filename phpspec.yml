@@ -1,0 +1,5 @@
+suites:
+    main:
+        namespace: CesarV\Processes
+        psr4_prefix: CesarV\Processes
+        src_path: pkg
