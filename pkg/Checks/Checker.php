@@ -7,8 +7,4 @@ interface Checker extends \JsonSerializable
     public function setParameters(array $params);
     
     public function getParameters();
-    
-    public function setFailedMessage($message);
-    
-    public function getFailedMessage();
 }

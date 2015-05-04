@@ -7,38 +7,23 @@ class TableRowCount extends Base Implements Checker
 {
     public function execute(array $args = array())
     {
-        $this->tableOne = $args['tableOne'];
-        $this->tableTwo = $args['tableTwo'];
+        extract($args);
         
         $expression = 'count(*)';
         
-        $q1 = $this->con->createQueryBuilder()->select($expression)->from($this->tableOne);
-        $q2 = $this->con->createQueryBuilder()->select($expression)->from($this->tableTwo);
+        $q1 = $this->con->createQueryBuilder()->select($expression)->from($tableOne);
+        $q2 = $this->con->createQueryBuilder()->select($expression)->from($tableTwo);
         
         $q1 = $this->con->fetchAll($q1);
         $q2 = $this->con->fetchAll($q2);
         
-        $this->tableOneCount = $q1[0][$expression];
-        $this->tableTwoCount = $q2[0][$expression];
+        $count1 = $q1[0][$expression];
+        $count2 = $q2[0][$expression];
         
-        if ($this->tableOneCount !== $this->tableTwoCount)
+        if ($count1 !== $count2)
         {
-            throw new Failed($this->getFailedMessage());
+            $m = sprintf('%s count: %s !== %s count: %s', $tableOne, $count1, $tableTwo, $count2);
+            throw new Failed($m);
         }
-    }
-    
-    function getFailedMessage()
-    {
-        if (isset($this->failedMessage))
-        {
-            return $this->failedMessage;
-        }
-        
-        return sprintf('%s count: %s !== %s count: %s', 
-                $this->tableOne, 
-                $this->tableOneCount, 
-                $this->tableTwo, 
-                $this->tableTwoCount
-               );
     }
 }

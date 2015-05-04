@@ -2,25 +2,11 @@
 
 class Check implements \JsonSerializable
 {
-    protected $failedMessage;
-    
     protected $params;
     
     public function __construct(array $parameters = array())
     {
         $this->setParameters($parameters);
-    }
-    
-    public function setFailedMessage($message)
-    {
-        $this->failedMessage = $message;
-        
-        return $this;
-    }
-    
-    public function getFailedMessage()
-    {
-        return $this->failedMessage;
     }
     
     public function setParameters(array $params)
@@ -43,7 +29,6 @@ class Check implements \JsonSerializable
         $type = str_replace(__NAMESPACE__ . '\\', '', $type);
         
         $json['type'] = $type;
-        $json['failed-message'] = $this->getFailedMessage();
         $json['params'] = $this->getParameters();
         
         return $json;

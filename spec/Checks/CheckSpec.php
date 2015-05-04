@@ -19,13 +19,6 @@ class CheckSpec extends ObjectBehavior
         $this->setParameters($params)->getParameters()->shouldReturn($params);
     }
     
-    function it_should_retain_its_failure_message()
-    {
-        $message = 'Crud, it failed';
-        
-        $this->setFailedMessage($message)->getFailedMessage()->shouldReturn($message);
-    }
-    
     function it_should_serialize_to_json()
     {
         $this->shouldImplement('JsonSerializable');
@@ -38,13 +31,12 @@ class CheckSpec extends ObjectBehavior
             'float' => 1.01,
             'boolean' => true,
             'array' => array('val2', 'val3'),
-        ))->setFailedMessage('It failed');
+        ));
         
         expect(json_encode($check, JSON_PRETTY_PRINT))->toReturn(
 <<<JSON
 {
     "type": "Check",
-    "failed-message": "It failed",
     "params": {
         "string": "test",
         "int": 1,

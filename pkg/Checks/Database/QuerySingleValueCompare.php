@@ -22,25 +22,13 @@ class QuerySingleValueCompare extends Base implements Checker
             throw new \LogicException('Query 2 returns more than one row: ' . $q2);
         }
         
-        $this->result1 = array_pop($result1[0]);
-        $this->result2 = array_pop($result2[0]);
+        $result1 = array_pop($result1[0]);
+        $result2 = array_pop($result2[0]);
         
-        if ( ! $this->stringToComparator($comparison, $this->result1, $this->result2))
+        if ( ! $this->stringToComparator($comparison, $q1, $q2))
         {
-            throw new Failed($this->getFailedMessage());
+            throw new Failed(sprintf("Values do not match. Q1 value: %s, Q2 value: %s", $q1, $q2));
         }
-    }
-    
-    public function getFailedMessage()
-    {
-        if (isset($this->failedMessage))
-        {
-            return $this->failedMessage;
-        }
-        
-        $m = "Values do not match. Q1 value: %s, Q2 value: %s";
-        
-        return sprintf($m, $this->result1, $this->result2);
     }
     
     protected function stringToComparator($comparison, $value1, $value2)

@@ -19,22 +19,12 @@ class ExpectedColumnValues extends Base implements Checker
         $values = $this->con->fetchAll($q);
         $values = Arrays::pluck($column, $values);
                 
-        $this->diff = array_diff($values, $expected);
+        $diff = array_diff($values, $expected);
         
-        if (count($this->diff) !== 0)
+        if (count($diff) !== 0)
         {
-            throw new Failed($this->getFailedMessage());
+            throw new Failed('New values: ' . implode(',', $diff));
         }
-    }
-
-    public function getFailedMessage() 
-    {
-        if (isset($this->failedMessage))
-        {
-            return $this->failedMessage;
-        }
-        
-        return 'New values: ' . implode(',', $this->diff);
     }
 }
 
